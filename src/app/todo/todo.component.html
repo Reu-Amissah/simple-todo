@@ -1,7 +1,7 @@
 <div
   class="min-w-screen min-h-screen flex justify-center items-center bg-mainbg"
 >
-  <div class="bg-secondarybg w-screen lg:w-7/12 rounded-3xl p-8">
+  <div class="bg-secondarybg w-11/12 h-11/12 lg:w-7/12 rounded-3xl p-8">
     <!-- nav bar component --------<< -->
     <header class="font-logo flex justify-between items-center mb-6">
       <div class="font-extrabold text-lg flex items-start">
@@ -15,23 +15,29 @@
       </span>
     </header>
 
-    <div class="w-5/12 mx-auto font-main">
+    <div class="w-11/12 lg:w-7/12 mx-auto font-main">
       <!-- todo tracking component -->
       <div
-        class="flex justify-between items-center p-10 border border-light rounded-3xl"
+        class="flex justify-between items-center p-6 lg:p-10 border border-light rounded-3xl"
       >
         <div>
-          <p class="font-bold text-2xl text-light tracking-wider">Todo Done</p>
-          <p class="font-semibold text-md text-light tracking-widest">
+          <p
+            class="font-bold text-xl lg:text-2xl text-light tracking-wide lg:tracking-wider"
+          >
+            Todo Done
+          </p>
+          <p
+            class="font-semibold text-sm lg:text-md text-light tracking-wide lg:tracking-widest"
+          >
             Keep it up
           </p>
         </div>
         <div
-          class="w-20 h-20 shrink-0 grow-0 rounded-full {{
+          class="w-16 h-16 lg:w-20 lg:h-20 shrink-0 grow-0 rounded-full {{
             this.filteredArray.length === this.todo.length
               ? 'bg-green'
               : 'bg-red'
-          }} flex justify-center items-center font-bold text-2xl text-mainbg tracking-widest"
+          }} flex justify-center items-center font-bold text-xl lg:text-2xl text-mainbg tracking-widest"
         >
           {{ this.filteredArray.length }}/{{ this.todo.length }}
         </div>
@@ -39,11 +45,11 @@
       <!-- todo tracking component end -->
 
       <div
-        class="w-11/12 flex justify-center items-center mx-auto space-x-3 my-5"
+        class="w-full lg:w-11/12 flex justify-center items-center mx-auto space-x-3 my-5"
       >
         <input
           type="text"
-          class="w-full font-main font-semibold bg-mainbg text-secondarybg px-4 py-2 rounded-2xl outline-none placeholder:text-secondarybg"
+          class="w-full font-main font-semibold bg-mainbg text-md text-secondarybg px-4 py-2 rounded-full lg:rounded-2xl outline-none placeholder:text-secondarybg"
           placeholder="write your next task here"
           [(ngModel)]="inputTodo"
         />
@@ -64,16 +70,17 @@
         >
           <div class="flex justify-center items-center space-x-2">
             <span
-              class="material-symbols-outlined  text-md {{
+              class="material-symbols-outlined  text-md hover:cursor-pointer {{
                 item.status ? 'text-green' : 'text-red'
               }}"
+              (click)="setDone($index)"
             >
               {{
                 item.status ? "radio_button_checked" : "radio_button_unchecked"
               }}
             </span>
             <p
-              class="text-light text-lg font-semibold {{
+              class="text-light text-md lg:text-lg font-semibold {{
                 item.status ? 'line-through' : ''
               }}"
             >
@@ -82,13 +89,13 @@
           </div>
           <div class="flex justify-center items-center space-x-1">
             <span
-              class="material-symbols-outlined text-light hover:cursor-pointer"
+              class="material-symbols-outlined text-light hover:cursor-pointer p-1 rounded-md hover:text-green hover:bg-mainbg"
               (click)="setDone($index)"
             >
               priority
             </span>
             <span
-              class="material-symbols-outlined text-light hover:cursor-pointer"
+              class="material-symbols-outlined text-light hover:cursor-pointer p-1 rounded-md hover:text-red hover:bg-mainbg"
               (click)="deleteTodo($index)"
             >
               delete
