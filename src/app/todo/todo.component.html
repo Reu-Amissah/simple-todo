@@ -1,0 +1,102 @@
+<div
+  class="min-w-screen min-h-screen flex justify-center items-center bg-mainbg"
+>
+  <div class="bg-secondarybg w-screen lg:w-7/12 rounded-3xl p-8">
+    <!-- nav bar component --------<< -->
+    <header class="font-logo flex justify-between items-center mb-6">
+      <div class="font-extrabold text-lg flex items-start">
+        <p class="text-light">TASK</p>
+        <p class="text-red">FLOW</p>
+      </div>
+      <span
+        class="material-symbols-outlined text-light hover:cursor-pointer px-3 py-2 rounded-md hover:bg-mainbg hover:text-red transition-colors duration-50 ease-in"
+      >
+        move_item
+      </span>
+    </header>
+
+    <div class="w-5/12 mx-auto font-main">
+      <!-- todo tracking component -->
+      <div
+        class="flex justify-between items-center p-10 border border-light rounded-3xl"
+      >
+        <div>
+          <p class="font-bold text-2xl text-light tracking-wider">Todo Done</p>
+          <p class="font-semibold text-md text-light tracking-widest">
+            Keep it up
+          </p>
+        </div>
+        <div
+          class="w-20 h-20 shrink-0 grow-0 rounded-full {{
+            this.filteredArray.length === this.todo.length
+              ? 'bg-green'
+              : 'bg-red'
+          }} flex justify-center items-center font-bold text-2xl text-mainbg tracking-widest"
+        >
+          {{ this.filteredArray.length }}/{{ this.todo.length }}
+        </div>
+      </div>
+      <!-- todo tracking component end -->
+
+      <div
+        class="w-11/12 flex justify-center items-center mx-auto space-x-3 my-5"
+      >
+        <input
+          type="text"
+          class="w-full font-main font-semibold bg-mainbg text-secondarybg px-4 py-2 rounded-2xl outline-none placeholder:text-secondarybg"
+          placeholder="write your next task here"
+          [(ngModel)]="inputTodo"
+        />
+        <span
+          class="material-symbols-outlined w-8 h-8 text-mainbg bg-red hover:cursor-pointer rounded-full shrink-0 grow-0 hover:bg-mainbg hover:text-red transition-colors duration-50 ease-in flex justify-center items-center"
+          (click)="addTodo()"
+        >
+          add
+        </span>
+      </div>
+      <!-- input to create new task  -->
+
+      <!-- task component markup -->
+      <div class="space-y-2">
+        @for (item of todo; track $index;) {
+        <div
+          class="font-main flex justify-between items-center px-4 py-3 rounded-lg border border-light"
+        >
+          <div class="flex justify-center items-center space-x-2">
+            <span
+              class="material-symbols-outlined  text-md {{
+                item.status ? 'text-green' : 'text-red'
+              }}"
+            >
+              {{
+                item.status ? "radio_button_checked" : "radio_button_unchecked"
+              }}
+            </span>
+            <p
+              class="text-light text-lg font-semibold {{
+                item.status ? 'line-through' : ''
+              }}"
+            >
+              {{ item.title }}
+            </p>
+          </div>
+          <div class="flex justify-center items-center space-x-1">
+            <span
+              class="material-symbols-outlined text-light hover:cursor-pointer"
+              (click)="setDone($index)"
+            >
+              priority
+            </span>
+            <span
+              class="material-symbols-outlined text-light hover:cursor-pointer"
+              (click)="deleteTodo($index)"
+            >
+              delete
+            </span>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
